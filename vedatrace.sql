@@ -25,8 +25,10 @@ CREATE TABLE "Harvest" (
     "timestamp" TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     "date_of_sending_harvest" DATE,
     "Batch_id" UUID UNIQUE NOT NULL,
-    "cid_of_harvest" VARCHAR(255)
+    "cid_of_harvest" VARCHAR(255),
+    "farmerUserName" VARCHAR(100) NOT NULL REFERENCES "User"("UserName") -- ✅ NEW
 );
+
 
 -- Creates the Processing Table to track the processing stage.
 CREATE TABLE "Processing" (

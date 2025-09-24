@@ -78,10 +78,31 @@ export function HarvestForm() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true)
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setIsSubmitting(false)
-    setIsSuccess(true)
+    // Prepare data for backend
+    const payload = {
+      Herb_type: plants.find((p) => p.id === formData.plant)?.name || formData.plant,
+      quantity_magnitude: parseFloat(formData.quantity),
+      quantity_unit: formData.unit,
+      color_name: colorOptions.find((c) => c.id === formData.leafColor)?.name || formData.leafColor,
+      longitude: formData.location?.lng,
+      latitude: formData.location?.lat,
+      // Optionally add more fields as needed
+    };
+    try {
+      const res = await fetch("/api/harvests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        setIsSuccess(true);
+      } else {
+        alert("Failed to submit harvest");
+      }
+    } catch (err) {
+      alert("Error submitting harvest");
+    }
+    setIsSubmitting(false);
   }
 
   const resetForm = () => {

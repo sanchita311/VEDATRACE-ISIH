@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 export default function LoginPage() {
   const router = useRouter();
   const [form, setForm] = useState({
-    EmailId: '',
+    UserName: '',
     password: '',
     User_type: '',
   });
@@ -42,7 +42,7 @@ export default function LoginPage() {
           Access herb traceability and user dashboard. <br /> उपयोगकर्ता डैशबोर्ड तक पहुंचें।
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input name="EmailId" placeholder="Email ID / ईमेल" required onChange={handleChange} className="border p-2 w-full" />
+          <input name="UserName" placeholder="Username / उपयोगकर्ता नाम" required onChange={handleChange} className="border p-2 w-full" />
           <input type="password" name="password" placeholder="Password / पासवर्ड" required onChange={handleChange} className="border p-2 w-full" />
           <select name="User_type" required onChange={handleChange} className="border p-2 w-full">
             <option value="">Select Role / भूमिका चुनें</option>
