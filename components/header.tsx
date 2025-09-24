@@ -88,10 +88,10 @@ export function Header() {
 
             {/* Auth Buttons (Desktop) */}
             <Link href="/auth/login" className="hidden md:inline-block">
-              <Button variant="outline" size="sm" className="ml-2">{language === "en" ? "Sign In" : "साइन इन"}</Button>
+              <Button variant="default" size="sm" className="ml-2 font-semibold shadow hover:bg-green-800 transition-colors">{language === "en" ? "Sign In" : "साइन इन"}</Button>
             </Link>
             <Link href="/auth/signup" className="hidden md:inline-block">
-              <Button variant="outline" size="sm" className="ml-2">{language === "en" ? "Sign Up" : "साइन अप"}</Button>
+              <Button variant="default" size="sm" className="ml-2 font-semibold shadow hover:bg-green-800 transition-colors">{language === "en" ? "Sign Up" : "साइन अप"}</Button>
             </Link>
             <Button
               variant="destructive"

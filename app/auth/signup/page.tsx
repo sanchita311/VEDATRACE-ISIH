@@ -52,7 +52,7 @@ export default function SignupPage() {
           <br />
           जड़ी-बूटियों के जीवन चक्र को ट्रैक करने के लिए पंजीकरण करें।
         </p>
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+  <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
           <input name="UserName" placeholder="Username / उपयोगकर्ता नाम" required onChange={handleChange} className="border p-2 col-span-2" />
           <input name="FullName" placeholder="Full Name / पूरा नाम" required onChange={handleChange} className="border p-2 col-span-2" />
           <input name="aadharId" placeholder="Aadhar ID" required maxLength={12} onChange={handleChange} className="border p-2" />
@@ -68,9 +68,16 @@ export default function SignupPage() {
           </select>
           <input type="password" name="password" placeholder="Password / पासवर्ड" required onChange={handleChange} className="border p-2 col-span-2" />
           <button type="submit" className="bg-green-700 text-white py-2 px-4 rounded col-span-2">
-            Register / पंजीकरण करें
+            Sign Up / साइन अप
           </button>
         </form>
+        <div className="mt-4 text-center">
+          <span className="text-sm">
+            Already have an account? <a href="/auth/login" className="text-green-700 underline font-semibold">Login</a>
+            <br />
+            पहले से खाता है? <a href="/auth/login" className="text-green-700 underline font-semibold">लॉगिन करें</a>
+          </span>
+        </div>
       </div>
     </div>
   );
