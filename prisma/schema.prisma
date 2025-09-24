@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Contact_Us {
+  contact_id Int     @id @default(autoincrement())
+  full_name  String  @db.VarChar(255)
+  Email      String  @db.VarChar(255)
+  ph_no      String? @db.VarChar(15)
+  user_type  String? @db.VarChar(50)
+  subject    String? @db.VarChar(100)
+  message    String?
+}
+
+model Harvest {
+  Harvest_id              String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Herb_type               String          @db.VarChar(255)
+  scientific_name         String?         @db.VarChar(255)
+  quantity_magnitude      Decimal?        @db.Decimal
+  quantity_unit           String?         @db.VarChar(50)
+  color_name              String?         @db.VarChar(50)
+  longitude               Decimal?        @db.Decimal
+  latitude                Decimal?        @db.Decimal
+  timestamp               DateTime?       @default(now()) @db.Timestamptz(6)
+  date_of_sending_harvest DateTime?       @db.Date
+  Batch_id                String          @unique @db.Uuid
+  cid_of_harvest          String?         @db.VarChar(255)
+  Lab_Testing             Lab_Testing[]
+  Manufacturing           Manufacturing[]
+  Processing              Processing[]
+}
+
+model Lab_Testing {
+  lab_testing_id String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name_of_lab    String?   @db.VarChar(255)
+  Date           DateTime? @db.Date
+  City           String?   @db.VarChar(100)
+  batch_id       String?   @db.Uuid
+  purity_percent Decimal?  @db.Decimal
+  cid_of_lab     String?   @db.VarChar(255)
+  Harvest        Harvest?  @relation(fields: [batch_id], references: [Batch_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Manufacturing {
+  Mfg_id      String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  mdate       DateTime? @db.Date
+  Expdate     DateTime? @db.Date
+  batch_id    String?   @db.Uuid
+  Pr_id       String?   @db.VarChar(255)
+  cid_of_manf String?   @db.VarChar(255)
+  Harvest     Harvest?  @relation(fields: [batch_id], references: [Batch_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Processing {
+  Processing_id     String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Name_of_center    String?   @db.VarChar(255)
+  Date              DateTime? @db.Date
+  City              String?   @db.VarChar(100)
+  Batch_id          String?   @db.Uuid
+  cid_of_processing String?   @db.VarChar(255)
+  Harvest           Harvest?  @relation(fields: [Batch_id], references: [Batch_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model User {
+  UserName  String  @id @db.VarChar(100)
+  FullName  String  @db.VarChar(255)
+  aadharId  String  @unique @db.VarChar(12)
+  ph_number String  @unique @db.VarChar(15)
+  EmailId   String  @unique @db.VarChar(255)
+  state     String? @db.VarChar(100)
+  City      String? @db.VarChar(100)
+  District  String? @db.VarChar(100)
+  User_type String? @db.VarChar(50)
+  password  String  @db.VarChar(255)
+}
