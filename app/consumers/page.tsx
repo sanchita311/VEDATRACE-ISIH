@@ -53,6 +53,40 @@ export default function ConsumersPage() {
             </div>
           </div>
         </section>
+        {/* How to Verify Section */}
+        <section className="py-16 bg-muted/30">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">How to Verify / कैसे सत्यापित करें</h2>
+              <p className="text-muted-foreground">
+                Follow these simple steps to verify your Ayurvedic product authenticity.
+                <br />
+                अपने आयुर्वेदिक उत्पाद की प्रामाणिकता सत्यापित करने के लिए इन सरल चरणों का पालन करें।
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+                <h3 className="font-semibold text-lg mb-2">Find QR Code<br /><span className="text-sm text-muted-foreground">QR कोड खोजें</span></h3>
+                <p className="text-sm text-muted-foreground">Look for the VEDATRACE QR code on your product packaging.</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+                <h3 className="font-semibold text-lg mb-2">Scan Code<br /><span className="text-sm text-muted-foreground">कोड स्कैन करें</span></h3>
+                <p className="text-sm text-muted-foreground">Use your phone camera or upload an image of the QR code.</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+                <h3 className="font-semibold text-lg mb-2">View Details<br /><span className="text-sm text-muted-foreground">विवरण देखें</span></h3>
+                <p className="text-sm text-muted-foreground">Access complete product journey, farmer details, and certificates.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+
         {/* QR Scanner Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
@@ -79,15 +113,19 @@ export default function ConsumersPage() {
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div><b>Herb Type / पौधा:</b> {product.Herb_type}</div>
-                    {product.scientific_name && <div><b>Scientific Name / वैज्ञानिक नाम:</b> {product.scientific_name}</div>}
+                    {/* {product.scientific_name && <div><b>Scientific Name / वैज्ञानिक नाम:</b> {product.scientific_name}</div>} */}
                     <div><b>Quantity / मात्रा:</b> {product.quantity_magnitude} {product.quantity_unit}</div>
-                    <div><b>Color / रंग:</b> {product.color_name}</div>
-                    <div><b>Location / स्थान:</b> {product.city}, {product.state}</div>
+                    <div><b>Color / रंग:</b> {product.color_name}</div><br></br>
+                    <div><b><i>Harvested by / कटाई करने वाला:</i></b></div>
+                    {/* <div><b>Location / स्थान:</b> {product.city}, {product.state}</div>
                     <div><b>Latitude / अक्षांश:</b> {product.latitude}</div>
-                    <div><b>Longitude / देशांतर:</b> {product.longitude}</div>
+                    <div><b>Longitude / देशांतर:</b> {product.longitude}</div> */}
                     <div><b>Farmer / किसान:</b> {product.farmerUserName}</div>
                     {product.timestamp && <div><b>Harvested At / कटाई का समय:</b> {new Date(product.timestamp).toLocaleString()}</div>}
-                    {product.cid_of_harvest && <div><b>IPFS CID:</b> <span className="font-mono text-xs">{product.cid_of_harvest}</span></div>}
+                    {/* {product.cid_of_harvest && <div><b>IPFS CID:</b> <span className="font-mono text-xs">{product.cid_of_harvest}</span></div>} */}
+                    <br></br> <div><b><i>Processed by / प्रसंस्करण:</i></b></div> <br></br>
+                      <div><b><i>Lab tested by / परीक्षण:</i></b></div> <br></br>
+                       <div><b><i>Manufactured & Packaged by / पैकेजिंग:</i></b></div> <br></br>
                   </CardContent>
                 </Card>
               </div>
@@ -96,8 +134,10 @@ export default function ConsumersPage() {
         </section>
         {/* Trust Indicators */}
         <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
+           <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Trust, authenticity & wellness - our promise/</h2>
+              <h2 className="text-3xl font-bold mb-4">भरोसा, प्रामाणिकता और स्वास्थ्य - हमारा वादा</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <Card className="text-center p-6">
                   <CardContent className="pt-6">
@@ -145,36 +185,7 @@ export default function ConsumersPage() {
             </div>
           </div>
         </section>
-        {/* How to Verify Section */}
-        <section className="py-16 bg-muted/30">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">How to Verify / कैसे सत्यापित करें</h2>
-              <p className="text-muted-foreground">
-                Follow these simple steps to verify your Ayurvedic product authenticity.
-                <br />
-                अपने आयुर्वेदिक उत्पाद की प्रामाणिकता सत्यापित करने के लिए इन सरल चरणों का पालन करें।
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
-                <h3 className="font-semibold text-lg mb-2">Find QR Code<br /><span className="text-sm text-muted-foreground">QR कोड खोजें</span></h3>
-                <p className="text-sm text-muted-foreground">Look for the VEDATRACE QR code on your product packaging.</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
-                <h3 className="font-semibold text-lg mb-2">Scan Code<br /><span className="text-sm text-muted-foreground">कोड स्कैन करें</span></h3>
-                <p className="text-sm text-muted-foreground">Use your phone camera or upload an image of the QR code.</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
-                <h3 className="font-semibold text-lg mb-2">View Details<br /><span className="text-sm text-muted-foreground">विवरण देखें</span></h3>
-                <p className="text-sm text-muted-foreground">Access complete product journey, farmer details, and certificates.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        
       </main>
       <Footer />
     </div>
