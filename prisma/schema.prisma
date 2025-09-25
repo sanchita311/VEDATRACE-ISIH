@@ -19,26 +19,27 @@ model Contact_Us {
 }
 
 model Harvest {
-  Harvest_id              String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  Herb_type               String          @db.VarChar(255)
-  scientific_name         String?         @db.VarChar(255)
-  quantity_magnitude      Decimal?        @db.Decimal
-  quantity_unit           String?         @db.VarChar(50)
-  color_name              String?         @db.VarChar(50)
-  longitude               Decimal?        @db.Decimal
-  latitude                Decimal?        @db.Decimal
-  timestamp               DateTime?       @default(now()) @db.Timestamptz(6)
-  date_of_sending_harvest DateTime?       @db.Date
-  Batch_id                String          @unique @db.Uuid
-  cid_of_harvest          String?         @db.VarChar(255)
+  Harvest_id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Herb_type          String   @db.VarChar(255)
+  scientific_name    String?  @db.VarChar(255)
+  quantity_magnitude Decimal? @db.Decimal
+  quantity_unit      String?  @db.VarChar(50)
+  color_name         String?  @db.VarChar(50)
+  longitude          Decimal? @db.Decimal
+  latitude           Decimal? @db.Decimal
+  timestamp          DateTime? @default(now()) @db.Timestamptz(6)
+  date_of_sending_harvest DateTime? @db.Date
+  Batch_id           String   @unique @db.Uuid
+  cid_of_harvest     String?  @db.VarChar(255)
+  city               String?  @db.VarChar(100)
+  state              String?  @db.VarChar(100)
 
-  // Relation to farmer (User)
-  farmerUserName          String
-  farmer                  User            @relation(fields: [farmerUserName], references: [UserName])
+  farmerUserName     String
+  farmer             User     @relation(fields: [farmerUserName], references: [UserName])
 
-  Lab_Testing             Lab_Testing[]
-  Manufacturing           Manufacturing[]
-  Processing              Processing[]
+  Lab_Testings     Lab_Testing[]
+  Manufacturings   Manufacturing[]
+  Processings      Processing[]
 }
 
 model Lab_Testing {
@@ -78,10 +79,11 @@ model User {
   aadharId  String  @unique @db.VarChar(12)
   ph_number String  @unique @db.VarChar(15)
   EmailId   String  @unique @db.VarChar(255)
-  state     String? @db.VarChar(100)
+  state     String  @db.VarChar(100)
+  city      String? @db.VarChar(100)
   City      String? @db.VarChar(100)
   District  String? @db.VarChar(100)
-  User_type String? @db.VarChar(50)
+  User_type String  @db.VarChar(50)
   password  String  @db.VarChar(255)
 
   harvests  Harvest[]

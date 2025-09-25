@@ -1,16 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/auth";
+// import { getCurrentUser } from "@/lib/auth";
 
 export async function GET(
   req: Request,
   { params }: { params: { id: string } }
 ) {
-  const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
   const harvest = await prisma.harvest.findFirst({
-    where: { Harvest_id: params.id, farmerUserName: user.UserName },
+    where: { cid_of_harvest: params.id },
   });
 
   if (!harvest) return NextResponse.json({ error: "Not found" }, { status: 404 });

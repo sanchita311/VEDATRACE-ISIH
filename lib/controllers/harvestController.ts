@@ -29,7 +29,7 @@ export async function POST_harvest(req: Request) {
     const newHarvest = await harvestService.create({
       ...body,
       farmerUserName: user.UserName,
-    });
+    }, user);
     console.log("HARVEST DEBUG: created", newHarvest);
     return NextResponse.json(newHarvest);
   } catch (error) {
