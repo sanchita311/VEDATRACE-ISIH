@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { QrCode, Camera, Upload } from "lucide-react"
-import QRCode from "qrcode"
+import jsQR from "jsqr"
 
 export default function QRScanner({ onScan }: { onScan?: (code: string) => void }) {
   const [scanMethod, setScanMethod] = useState<"camera" | "upload" | "manual" | null>(null);
@@ -19,7 +19,7 @@ export default function QRScanner({ onScan }: { onScan?: (code: string) => void 
     alert("Camera scanning is not implemented in this demo. Please use upload or manual entry.");
   };
 
-  // File upload and QR decode using 'qrcode' package
+  // File upload and QR decode using jsqr
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -41,15 +41,16 @@ export default function QRScanner({ onScan }: { onScan?: (code: string) => void 
               if (ctx) {
                 ctx.drawImage(img, 0, 0);
                 const imageDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                // Use 'qrcode' to decode
-                try {
-                  // qrcode.decode expects a canvas, so we use QRCode.decode from 'qrcode' package
-                  // But 'qrcode' package is mainly for generation, not decoding. For decoding, use 'jsqr' or similar.
-                  // Here, we show the structure for future implementation.
-                  // onScan?.(decodedCid);
-                  alert("QR code decoding not implemented. Please use manual entry for now.");
-                } catch (err) {
-                  alert("Failed to decode QR code.");
+                // jsQR expects Uint8ClampedArray
+                const code = jsQR(
+                  imageDataObj.data,
+                  canvas.width,
+                  canvas.height
+                );
+                if (code && code.data) {
+                  onScan?.(code.data);
+                } else {
+                  alert("Could not decode QR code. Please try manual entry.");
                 }
               }
               setIsScanning(false);
