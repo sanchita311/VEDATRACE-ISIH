@@ -5,6 +5,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Shield, Leaf, Users, QrCode, MapPin, CheckCircle } from "lucide-react"
 import Link from "next/link"
 
+import Image from "next/image"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -29,6 +32,28 @@ export default function HomePage() {
                   ब्लॉकचेन तकनीक के माध्यम से खेत से फार्मेसी तक आयुर्वेदिक जड़ी-बूटियों की प्रामाणिकता और ट्रेसबिलिटी सुनिश्चित करना।
                 </span>
               </p>
+
+              {/* Farmer Images Slider */}
+              <div className="max-w-2xl mx-auto mb-10">
+                <Carousel>
+                  <CarouselContent>
+                    <CarouselItem>
+                      <Image src="/farmer1.jpg" alt="Farmer 1" width={500} height={300} className="rounded-xl object-cover w-full h-64" />
+                    </CarouselItem>
+                    <CarouselItem>
+                      <Image src="/farmer2.jpg" alt="Farmer 2" width={500} height={300} className="rounded-xl object-cover w-full h-64" />
+                    </CarouselItem>
+                    <CarouselItem>
+                      <Image src="/farmer3.jpg" alt="Farmer 3" width={500} height={300} className="rounded-xl object-cover w-full h-64" />
+                    </CarouselItem>
+                    <CarouselItem>
+                      <Image src="/farmer4.jpg" alt="Farmer 4" width={500} height={300} className="rounded-xl object-cover w-full h-64" />
+                    </CarouselItem>
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="text-lg px-8">
