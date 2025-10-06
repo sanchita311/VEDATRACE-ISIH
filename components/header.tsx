@@ -1,16 +1,24 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Globe, Menu, X } from "lucide-react"
 
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [language, setLanguage] = useState<"en" | "hi">("en")
+  const router = useRouter();
 
   const toggleLanguage = () => {
     setLanguage(language === "en" ? "hi" : "en")
+  }
+
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.push("/");
   }
 
   const navigation = [
@@ -66,7 +74,7 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Language Toggle & Mobile Menu */}
+          {/* Language Toggle, Auth Buttons & Mobile Menu */}
           <div className="flex items-center space-x-2">
             <Button
               variant="ghost"
@@ -76,6 +84,22 @@ export function Header() {
             >
               <Globe className="w-4 h-4 mr-1" />
               {language === "en" ? "हिंदी" : "English"}
+            </Button>
+
+            {/* Auth Buttons (Desktop) */}
+            <Link href="/auth/login" className="hidden md:inline-block">
+              <Button variant="default" size="sm" className="ml-2 font-semibold shadow hover:bg-green-800 transition-colors">{language === "en" ? "Sign In" : "साइन इन"}</Button>
+            </Link>
+            <Link href="/auth/signup" className="hidden md:inline-block">
+              <Button variant="default" size="sm" className="ml-2 font-semibold shadow hover:bg-green-800 transition-colors">{language === "en" ? "Sign Up" : "साइन अप"}</Button>
+            </Link>
+            <Button
+              variant="destructive"
+              size="sm"
+              className="hidden md:inline-block ml-2"
+              onClick={handleLogout}
+            >
+              {language === "en" ? "Logout" : "लॉगआउट"}
             </Button>
 
             {/* Mobile Menu Button */}
@@ -104,6 +128,20 @@ export function Header() {
                   {language === "en" ? item.en : item.hi}
                 </Link>
               ))}
+              <Link href="/auth/login" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="outline" size="sm" className="w-full mt-2">{language === "en" ? "Sign In" : "साइन इन"}</Button>
+              </Link>
+              <Link href="/auth/signup" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="outline" size="sm" className="w-full mt-2">{language === "en" ? "Sign Up" : "साइन अप"}</Button>
+              </Link>
+              <Button
+                variant="destructive"
+                size="sm"
+                className="w-full mt-2"
+                onClick={() => { handleLogout(); setIsMenuOpen(false); }}
+              >
+                {language === "en" ? "Logout" : "लॉगआउट"}
+              </Button>
             </nav>
           </div>
         )}
