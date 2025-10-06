@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 export default function LoginPage() {
   const router = useRouter();
   const [form, setForm] = useState({
-    EmailId: '',
+    UserName: '',
     password: '',
     User_type: '',
   });
@@ -41,8 +41,8 @@ export default function LoginPage() {
         <p className="mb-6 text-sm text-gray-700">
           Access herb traceability and user dashboard. <br /> उपयोगकर्ता डैशबोर्ड तक पहुंचें।
         </p>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input name="EmailId" placeholder="Email ID / ईमेल" required onChange={handleChange} className="border p-2 w-full" />
+  <form onSubmit={handleSubmit} className="space-y-4">
+          <input name="UserName" placeholder="Username / उपयोगकर्ता नाम" required onChange={handleChange} className="border p-2 w-full" />
           <input type="password" name="password" placeholder="Password / पासवर्ड" required onChange={handleChange} className="border p-2 w-full" />
           <select name="User_type" required onChange={handleChange} className="border p-2 w-full">
             <option value="">Select Role / भूमिका चुनें</option>
@@ -53,9 +53,16 @@ export default function LoginPage() {
             <option value="Consumer">Consumer / उपभोक्ता</option>
           </select>
           <button type="submit" className="bg-green-700 text-white py-2 px-4 rounded w-full">
-            Login / लॉगिन करें
+            Sign In / साइन इन
           </button>
         </form>
+        <div className="mt-4 text-center">
+          <span className="text-sm">
+            Don&apos;t have an account? <a href="/auth/signup" className="text-green-700 underline font-semibold">Sign Up</a>
+            <br />
+            खाता नहीं है? <a href="/auth/signup" className="text-green-700 underline font-semibold">साइन अप करें</a>
+          </span>
+        </div>
       </div>
     </div>
   );
