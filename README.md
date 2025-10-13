@@ -7,14 +7,17 @@ VEDATRACE is a blockchain herb traceability platform built to trace the lifecycl
 
 ## Tech Stack
 
-| Layer     | Tech Used                                       |
-|-----------|-------------------------------------------------|
-| Frontend  | React (with Next.js App Router, TypeScript)     |
-| Styling   | Tailwind CSS                                    |
-| Backend   | Next.js (API Routes),Typescript(.ts),Prisma ORM |
-| Database  | PostgreSQL                                      |
-| Auth      | (Planned: JWT or NextAuth)                      |
-| Package   | npm                                             |
+| Layer             | Tech Used                                                   |
+|-------------------|-------------------------------------------------------------|
+| Frontend          | React (with Next.js App Router, TypeScript)                 |
+| Styling           | Tailwind CSS                                                |
+| Backend           | Next.js (API Routes),Typescript(.ts),Prisma ORM             |
+| Database          | PostgreSQL                                                  |
+| Auth              | Cookie Sessions                                             |
+| Package           | npm                                                         |
+| IPFS & (Pinata)   | Decentralized file storage                                  |
+| Solidity & Polygon| For writing and deploying our on-chain smart contract.      |
+| Ethers.js         | To connect our backend service to the blockchain            |                                            
 
 ---
 
@@ -26,6 +29,7 @@ VEDATRACE is a blockchain herb traceability platform built to trace the lifecycl
 git clone https://github.com/Parshv-sudo/VEDATRACE.git
 cd VEDATRACE
 ```
+Make your .env file by following the .env.example file.
 
 ### 2. Install Dependencies
 ```
@@ -56,15 +60,6 @@ npm run dev
 ```
 Your app should now be running at: http://localhost:3000
 
-### Project Structure (Brief Overview)
-```
-app/                → Pages and routes (Next.js App Router)
-components/         → Reusable UI components
-lib/                → Prisma client and helpers
-prisma/schema.prisma → DB models
-public/             → Static assets
-styles/             → Global styles
-```
 ### Contributing
 Before You Start
 ```
